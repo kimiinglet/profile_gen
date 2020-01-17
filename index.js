@@ -77,5 +77,7 @@ function gitHubRequest(queryURL) {
         const following = gitResponse.data.following;
         console.log(following)
         
+    }).catch(function(error){
+        console.log(error);
     });
 };
