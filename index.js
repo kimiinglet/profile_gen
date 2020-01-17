@@ -42,42 +42,30 @@ gitHubRequest(queryURL).then(function(){})
 function gitHubRequest(queryURL) {
     return axios.get(queryURL)
     .then(function(gitResponse){
+
+        let userData = {
         //avitar URL
-        const proPic = gitResponse.data.avatar_url + ".png";
+        proPic : (gitResponse.data.avatar_url + ".png"),
+        gitUsername : (gitResponse.data.login),
+        location : (gitResponse.data.location),
+        profileURL : (gitResponse.data.html_url),
+        blog : (gitResponse.data.blog),
+        userBio : (gitResponse.data.bio),
+        publicRepos : (gitResponse.data.public_repos),
+        followers : (gitResponse.data.followers),
+        following : (gitResponse.data.following)
+        };
 
-        //github Username
-        const gitUsername = gitResponse.data.login;
-        console.log(gitUsername);
-
-        //user location
-        const location = gitResponse.data.location;
-        console.log(location);
-
-        //profile
-        const profileURL = gitResponse.data.html_url;
-        console.log(profileURL);
-
-        //blog
-        const blog = gitResponse.data.blog;
-        console.log(blog);
-
-        //bio
-        const userBio = gitResponse.data.bio;
-        console.log(userBio);
-
-        //public repositories
-        const publicRepos = gitResponse.data.public_repos;
-        console.log(publicRepos);
-
-        //numberOfFollowers
-        const followers = gitResponse.data.followers;
-        console.log(followers);
-
-        //numberOfFollowing
-        const following = gitResponse.data.following;
-        console.log(following)
+        return data;
         
     }).catch(function(error){
         console.log(error);
     });
 };
+
+function githubStars(starredURL){
+    return axios.get(starredURL)
+    .then(function (starResponse) {
+        return starResponse.data.length;
+    });
+}
