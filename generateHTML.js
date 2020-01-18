@@ -219,7 +219,7 @@ function generateHTML(res, starResponse, userData) {
       
       <div class="card">
         <h4>Following</h4>
-        <h5>${userData.Following}</h5>
+        <h5>${userData.following}</h5>
       </div>
     </div>
     </div>
@@ -233,3 +233,4 @@ function generateHTML(res, starResponse, userData) {
 };
 
 
+module.exports = generateHTML;

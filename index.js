@@ -1,11 +1,11 @@
 // dependencies
 const fs = require("fs");
 const inquirer = require('inquirer');
-const axios = require('axios');
+const axios = require('axios').default;
 const generateHTML = require('./generateHTML');
 const util = require("util");
 const writeFileAsync = util.promisify(fs.writeFile); // gives format to return promise
-
+const pdf = require('html-pdf');
 
 
 //prompt user for username and favorite color
@@ -32,7 +32,7 @@ inquirer.prompt([
     const userColor = res.color;
 
     const queryURL = `https://api.github.com/users/${userName}`;
-    const starredURL = `https://api.github.com/users/${userName}/starred{/owner}{/repo}`;
+    const starredURL = `https://api.github.com/users/${userName}/starred`;
 
 
     //calling a function
@@ -40,9 +40,9 @@ gitHubRequest(queryURL).then(function(userData){
     githubStars(starredURL)
     .then(function(starResponse) {
         const options = { format: 'Letter' };
-        pdf.create(getHTML(res, starResponse, userData), options).toFile(`./${userInput.username}.pdf`, function (err, res) {
+        pdf.create(generateHTML(res, starResponse, userData), options).toFile(`./${userName.username}.pdf`, function (err, result) {
             if (err) return console.log(err);
-            console.log(res);
+            console.log(result);
         })
     })
 })
@@ -69,7 +69,7 @@ function gitHubRequest(queryURL) {
         following : (gitResponse.data.following)
         };
 
-        return data;
+        return userData;
         
     }).catch(function(error){
         console.log(error);
