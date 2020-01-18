@@ -45,6 +45,7 @@ function gitHubRequest(queryURL) {
 
         let userData = {
         //avitar URL
+        fullName : (gitResponse.data.name),
         proPic : (gitResponse.data.avatar_url + ".png"),
         gitUsername : (gitResponse.data.login),
         location : (gitResponse.data.location),
@@ -63,6 +64,7 @@ function gitHubRequest(queryURL) {
     });
 };
 
+//api call for number of stars
 function githubStars(starredURL){
     return axios.get(starredURL)
     .then(function (starResponse) {
