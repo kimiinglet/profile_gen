@@ -36,9 +36,21 @@ inquirer.prompt([
 
 
     //calling a function
-gitHubRequest(queryURL).then(function(){})
+gitHubRequest(queryURL).then(function(userData){
+    githubStars(starredURL)
+    .then(function(starResponse) {
+        const options = { format: 'Letter' };
+        pdf.create(getHTML(res, starResponse, userData), options).toFile(`./${userInput.username}.pdf`, function (err, res) {
+            if (err) return console.log(err);
+            console.log(res);
+        })
+    })
+})
 });
 
+
+
+//API CALL
 function gitHubRequest(queryURL) {
     return axios.get(queryURL)
     .then(function(gitResponse){

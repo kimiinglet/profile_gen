@@ -1,32 +1,32 @@
 const colors = {
-    green: {
-      wrapperBackground: "#E6E1C3",
-      headerBackground: "#C1C72C",
-      headerColor: "black",
-      photoBorderColor: "#black"
-    },
-    blue: {
-      wrapperBackground: "#5F64D3",
-      headerBackground: "#26175A",
-      headerColor: "white",
-      photoBorderColor: "#73448C"
-    },
-    pink: {
-      wrapperBackground: "#879CDF",
-      headerBackground: "#FF8374",
-      headerColor: "white",
-      photoBorderColor: "#FEE24C"
-    },
-    red: {
-      wrapperBackground: "#DE9967",
-      headerBackground: "#870603",
-      headerColor: "white",
-      photoBorderColor: "white"
-    }
-  };
-  
-  function generateHTML(data) {
-    return `<!DOCTYPE html>
+  green: {
+    wrapperBackground: "#E6E1C3",
+    headerBackground: "#C1C72C",
+    headerColor: "black",
+    photoBorderColor: "#black"
+  },
+  blue: {
+    wrapperBackground: "#5F64D3",
+    headerBackground: "#26175A",
+    headerColor: "white",
+    photoBorderColor: "#73448C"
+  },
+  pink: {
+    wrapperBackground: "#879CDF",
+    headerBackground: "#FF8374",
+    headerColor: "white",
+    photoBorderColor: "#FEE24C"
+  },
+  red: {
+    wrapperBackground: "#DE9967",
+    headerBackground: "#870603",
+    headerColor: "white",
+    photoBorderColor: "white"
+  }
+};
+
+function generateHTML(res, starResponse, userData) {
+  return `<!DOCTYPE html>
   <html lang="en">
      <head>
         <meta charset="UTF-8" />
@@ -34,7 +34,7 @@ const colors = {
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"/>
         <link href="https://fonts.googleapis.com/css?family=BioRhyme|Cabin&display=swap" rel="stylesheet">
-        <title>Document</title>
+        <title>${userData.fullName}</title>
         <style>
             @page {
               margin: 0;
@@ -170,5 +170,66 @@ const colors = {
               zoom: .75; 
             } 
            }
-        </style>`
-          }
+        </style>
+        </head>
+        <body>
+        
+    <div class="wrapper">
+     
+        <div class="photo-header"><img class="photo-header img" src="${userData.proPic}" alt="profile-img">
+        
+        <h3>Hi!</h3>
+        
+        <h3>My name is ${userData.fullName}!</h3>
+        
+        <div class="links-nav">
+          <span class="nav-link"><a href="https://www.google.com/maps/place/${userData.location}">${userData.location}</a></span>
+          <span class="nav-link"><a href="${userData.profileURL}">Github</a></span>
+          <span class="nav-link"><a href="${userData.blog}">Blog</a></span>
+        </div>
+    </div>
+  
+  <main>
+  
+  <div class="container">
+    
+  <div class="row">
+      <h5>${userData.userBio}</h5>
+    </div>
+   
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <h4>Public Repositories</h4>
+          <h5>${userData.publicRepos}</h5>
+        </div>
+        
+        <div class="card">
+          <h4>Starred Projects</h4>
+          <h5>${userData.starResponse}</h5>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col">
+      <div class="card">
+        <h4>Followers</h4>
+        <h5>${userData.followers}</h5>
+      </div>
+      
+      <div class="card">
+        <h4>Following</h4>
+        <h5>${userData.Following}</h5>
+      </div>
+    </div>
+    </div>
+  </div>
+  </main>
+  </div>
+  
+  <footer></footer>
+  </body>
+</html>`
+};
+
+
